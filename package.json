@@ -1,0 +1,33 @@
+{
+  "name": "dec-injection-dependency",
+  "version": "1.0.0",
+  "description": "A simple way to inject dependency with decorators",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -d",
+    "test": "test"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuilhermeSevero/dec-injection-dependency.git"
+  },
+  "keywords": [
+    "inject",
+    "dependency",
+    "decorator",
+    "TypeScript"
+  ],
+  "author": "Guilherme Severo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuilhermeSevero/dec-injection-dependency/issues"
+  },
+  "homepage": "https://github.com/GuilhermeSevero/dec-injection-dependency#readme",
+  "devDependencies": {
+    "tsc": "^2.0.3",
+    "typescript": "^4.3.5"
+  }
+}
