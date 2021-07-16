@@ -1,6 +1,6 @@
 # dec-injection-dependency
 
-A very simple way to inject dependencies using decorators.
+A very simple way to inject dependencies using decorators. It's means that it allow us to implements a easy dependency inversion, using SOLID and Clean Architecture principles.
 
 ## Installation
 1. Install package:
