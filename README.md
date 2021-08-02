@@ -3,14 +3,15 @@
 A very simple way to inject dependencies using decorators. It's means that it allow us to implements a easy dependency inversion, using SOLID and Clean Architecture principles.
 
 ## Installation
-1. Install package:
-    ```
-    npm install dependency-injection-decorator
-    ```
+Installing package:
+```
+npm install -S dependency-injection-decorator
+```
 
 ## Using
-You need to decorate your classes to allow later injection.
+You need to decorate your classes to allow injection.
 ```ts
+// my-print.ts
 import { Injectable } from 'dependency-injection-decorator';
 
 export interface IMyPrint {
@@ -28,9 +29,12 @@ class MyInjectablePrint implements IMyPrint {
 
 Afterwards, all decorated classes can be injected as an attribute in another class
 ```ts
+// testing-injection.ts
 import { Inject } from 'dependency-injection-decorator';
 
-class TestingInjection {
+import { IMyPrint } from './my-print';
+
+export class TestingInjection {
 
   @Inject('MyInjectablePrint')
   private myInjectablePrintObject: IMyPrint;
@@ -39,6 +43,45 @@ class TestingInjection {
     this.myInjectablePrintObject.printMessage('Hello World');
   }
 }
+```
+
+## Testing
+Using the previous decorated classes, you can overload the injected object
+
+```ts
+// testing-injection.spec.ts
+import { testUtils } from 'dependency-injection-decorator';
+
+import { TestingInjection } from './testing-injection';
+
+describe('TestingInjection', () => {
+  let testingInjection: TestingInjection;
+
+  let printMessageMock: jest.Mock;
+
+  beforeAll(() => {
+    testingInjection = new TestingInjection();
+
+    printMessageMock = jest.fn();
+    testUtils.overloadInjectable('MyInjectablePrint', { printMessage: printMessageMock })
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should call mocked function', () => {
+    testingInjection.doSomething();
+
+    expect(printMessageMock).toBeCalledTimes(1);
+    expect(printMessageMock).toBeCalledWith('Hello World')
+  });
+});
+
 ```
 
 ## Contributing

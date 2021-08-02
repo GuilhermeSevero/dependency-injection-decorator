@@ -1,18 +1,17 @@
 /* eslint-disable arrow-body-style */
 
-const injectables: { [key: string]: any } = {};
+import { context } from './context';
 
 export const Injectable = (): Function => {
   return (Target: any) => {
-    const key: string = Target.name;
-    injectables[key] = new Target();
+    context.addInjectable(Target);
   };
 };
 
 export const Inject = (className: string): Function => {
   return (target: any, key: string): void => {
     Object.defineProperty(target, key, {
-      get: () => injectables[className],
+      get: () => context.getInjectable(className),
       enumerable: true,
       configurable: true,
     });

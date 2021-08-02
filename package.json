@@ -1,10 +1,10 @@
 {
   "name": "dependency-injection-decorator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple way to inject dependency with decorators",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -d",
+    "build": "rm -rf dist && tsc -d",
     "test": "test"
   },
   "files": [
